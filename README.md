@@ -38,7 +38,7 @@ A library has an instance variable `@book_cases` which references some data stru
 
 Let's walk through the `@book_cases` data structure one step at a time.
 
-It is an **Array** of **Hashes**. Each **Hash** represents an individual book case. The book case hash has two key-value pairs. One key indicates the book case's *row id*, which is a single character **String**. The value of the `:shelves` key is itself another **Hash**. Each key of this hash is a **String** representing that individual shelf's *shelf number*. Each shelf number points to an **Array** of **Book** Objects.  A book object has several properties such as `title`, `author`, `page_count`.  Check `book.rb` to see all the properties of a book object.
+It is an **array** of 3 **hashes**. Each **hash** represents an individual book case. The book case hash has two key-value pairs. One key indicates the book case's *row id*, which is a single character **string**. The value of the `:shelves` key is itself another **hash**. Each key of this hash is a **string** representing that individual shelf's *shelf number*. Each shelf number points to an **array** of **Book** Objects.  A book object has several properties such as `title`, `author`, `page_count`.  Check `book.rb` to see all the properties of a book object.
 
 Diving deep into this data structure will definitely requiring some serious method chaining and it will be easy to lose track of where you are at.
 
@@ -121,6 +121,6 @@ We're almost there and our Book objects are now in sight. They are just wrapped 
 
 Finally we have the book object we want.  The only step left is that rather than returning the whole object we want to return the book's title as a String.  That's easy enough. If we look at the `Book` class definition in `book.rb` we can see what methods are available to us.  While it may look like there's only one method there, `initialize`, remember that the `attr_accessor` macro is actually just a shorthand way of writing getter and setter methods.  Let's use the `title` getter to grab the desired string off of the full Book object.
 
-## To keep in mind
+## To Keep in Mind
 When going through this lab and navigating down into the deeply nested data structure you may find your task easier if you can always answer the question 'What type of thing am I working with right now?'.
 Knowing that, for example, the object you are working with is a Hash is great information to have because it can help you determine what the next step needs to be.  This will also help explain strange errors such as `Undefined method: 'each' for ...` that tell you a method you know exists is undefined.  It's not that the method disappeared, but rather that you are calling it on the wrong type of thing.  Double check that you are in fact calling that method on the type of thing you think you are.
