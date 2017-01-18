@@ -88,10 +88,11 @@ This is interesting because so far we have been talking about calling methods an
 ```ruby
 hash = {}
 hash[:a] = 1
+hash[:a]
 => 1
 # all good so far, now lets try
 hash = nil
-hash[:a] = 1
+hash[:a]
 # You will see
 # NoMethodError: undefined method `[]' for nil:NilClass
 ```
