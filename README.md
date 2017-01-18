@@ -42,6 +42,8 @@ It is an **array** of 3 **hashes**. Each **hash** represents an individual book 
 
 Diving deep into this data structure will definitely requiring some serious method chaining and it will be easy to lose track of where you are at.
 
+##One-dot-at-a-time Example
+
 Imagine you wanted to write an instance method `#get_specific_book_title` that returns the title of the *first book* on the *third shelf* of the *last book case*.
 
 ```ruby
