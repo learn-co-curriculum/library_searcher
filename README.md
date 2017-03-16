@@ -68,21 +68,22 @@ We are inside of an instance method of the `Library` class so `self` is a specif
 
 Luckily, the next thing we call is `book_cases` which is the reader method available to us from to the `attr_accessor`
 
-- `self`
-- `self.book_cases`
+
+- `self` (*the library object*)
+- `self.book_cases` 
 
 At this point we have an **array**. Yes, It is a deeply nested array, but we don't need to worry about that for now. It's great to keep in mind the *type of the current value* because it can help us choose what methods to call next. Since we currently have an array we should only be thinking about about the things we normally do to arrays. Usually that's iterate or grab the value at a specific index. In this case we are calling the `last` method which is a built-in method all Ruby arrays have.
 
-- `self`
-- `self.book_cases`
-- `self.book_cases.last`
+- `self` (*the library object*)
+- `self.book_cases` (*an array*)
+- `self.book_cases.last` 
 
 If we refer to the data structure at the top the page we'll see that this expression returns a **hash**. Sometimes we iterate over hashes but the most common operation we do is access a hash at a certain key which returns a value. That's exactly what we want to do here. We want the value at the `:shelves` key.
 
-- `self`
-- `self.book_cases`
-- `self.book_cases.last`
-- `self.book_cases.last[:shelves]`
+- `self` (*the library object*)
+- `self.book_cases` (*an array*)
+- `self.book_cases.last` (*a hash*)
+- `self.book_cases.last[:shelves]` 
 
 This is interesting because so far we have been talking about calling methods and chaining methods with `.`s but here it's not obvious that there is a method being called. There actually is a method being called, it's just a little hidden by some ruby syntactic sugar.  Open up IRB and try this:
 ```ruby
@@ -100,27 +101,30 @@ hmm.. what is going on? When we use the bracket notation to access a hash at a c
 This is good to keep in mind because the rule that the expression to the left of the dot will evaluate and return still applies here even though the `.` is sort of hidden when we use the bracket notation.
 So at this point we're at `self.book_cases.last[:shelves]`. That expression evaluates and returns yet another **hash**. The hash that is the value of the `:shelves` key.
 
-- `self`
-- `self.book_cases`
-- `self.book_cases.last`
-- `self.book_cases.last[:shelves]`
-- `self.book_cases.last[:shelves]['3']`
+- `self` (*the library object*)
+- `self.book_cases` (*an array*)
+- `self.book_cases.last` (*a hash*)
+- `self.book_cases.last[:shelves]` (*another hash*)
+- `self.book_cases.last[:shelves][3]` 
 
 We said that normally we work with hashes by giving them a key and getting back the value. We'll do the same here! Again using the bracket notation that is a method call in disguise we'll get the value at the key of `'3'`. The data-type that we are now working with will be an array
 
-- `self`
-- `self.book_cases`
-- `self.book_cases.last`
-- `self.book_cases.last[:shelves]`
-- `self.book_cases.last[:shelves]['3'].first`
+- `self` (*the library object*)
+- `self.book_cases` (*an array*)
+- `self.book_cases.last` (*a hash*)
+- `self.book_cases.last[:shelves]` (*another hash*)
+- `self.book_cases.last[:shelves][3]` (*an array of Book objects*)
+- `self.book_cases.last[:shelves][3].first` 
 
 We're almost there and our Book objects are now in sight. They are just wrapped inside of an array. The methods available to us in our toolbox now are all the methods that an Array has. Using the `first` method we'll grab the first book out of the array. This expression returns an instance of the Book class.
 
-- `self`
-- `self.book_cases`
-- `self.book_cases.last`
-- `self.book_cases.last[:shelves]`
-- `self.book_cases.last[:shelves]['3'].first.title`
+- `self` (*the library object*)
+- `self.book_cases` (*an array*)
+- `self.book_cases.last` (*a hash*)
+- `self.book_cases.last[:shelves]` (*another hash*)
+- `self.book_cases.last[:shelves][3]` (*an array of Book objects*)
+- `self.book_cases.last[:shelves][3].first` (*a Book instance*)
+- `self.book_cases.last[:shelves]['3'].first.title` 
 
 Finally we have the book object we want.  The only step left is that rather than returning the whole object we want to return the book's title as a String.  That's easy enough. If we look at the `Book` class definition in `book.rb` we can see what methods are available to us.  While it may look like there's only one method there, `initialize`, remember that the `attr_accessor` macro is actually just a shorthand way of writing getter and setter methods.  Let's use the `title` getter to grab the desired string off of the full Book object.
 
